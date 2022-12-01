@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 
 namespace GroupWebProject.Data;
 
-public class GroupContext : IdentityDbContext<AppUser>
+public class GroupContext : IdentityDbContext<IdentityUser>
 {
     public GroupContext(DbContextOptions<GroupContext> options)
         : base(options)
@@ -18,5 +20,15 @@ public class GroupContext : IdentityDbContext<AppUser>
         // Customize the ASP.NET Identity model and override the defaults if needed.
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
+        builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
+
+    }
+    public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<AppUser>
+    {
+        public void Configure(EntityTypeBuilder<AppUser> builder)
+        {
+            builder.Property(u => u.FirstName).HasMaxLength(255);
+            builder.Property(u => u.LastName).HasMaxLength(255);
+        }
     }
 }
