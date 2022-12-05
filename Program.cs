@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using GroupWebProject.Areas.Identity.Data;
 using GroupWebProject.Data;
+using GroupWebProject.Migrations;
+using SeedData = GroupWebProject.Areas.Identity.Data.SeedData;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("GroupContextConnection") ?? throw new InvalidOperationException("Connection string 'GroupContextConnection' not found.");
 
@@ -32,6 +35,12 @@ app.UseAuthentication();;
 
 app.UseAuthorization();
 
+var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<GroupContext>();
+SeedData.SeedDatabase(context);
+
 app.MapRazorPages();
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
