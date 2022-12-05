@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using GroupWebProject.Models;
+using System.Xml.Linq;
 
 
 namespace GroupWebProject.Data;
@@ -21,6 +23,7 @@ public class GroupContext : IdentityDbContext<IdentityUser>
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
         builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
+        builder.Entity<AdminDash>().HasData(new AdminDash { Id = 1, Name = "admin" });
 
     }
     public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<AppUser>
@@ -31,4 +34,5 @@ public class GroupContext : IdentityDbContext<IdentityUser>
             builder.Property(u => u.LastName).HasMaxLength(255);
         }
     }
+    public DbSet<AdminDash> AdminDash { get; set; }
 }
