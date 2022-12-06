@@ -2,8 +2,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using GroupWebProject.Areas.Identity.Data;
 using GroupWebProject.Data;
+
+using System;
+
 using GroupWebProject.Migrations;
 using SeedData = GroupWebProject.Areas.Identity.Data.SeedData;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("GroupContextConnection") ?? throw new InvalidOperationException("Connection string 'GroupContextConnection' not found.");
@@ -11,21 +15,27 @@ var connectionString = builder.Configuration.GetConnectionString("GroupContextCo
 builder.Services.AddDbContext<GroupContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<GroupContext>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+AddAuthorizationPolicies();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -44,3 +54,11 @@ var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<Grou
 SeedData.SeedDatabase(context);
 
 app.Run();
+
+void AddAuthorizationPolicies()
+{
+    builder.Services.AddAuthorization(options => 
+    {
+        options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Admin"));
+});
+}
