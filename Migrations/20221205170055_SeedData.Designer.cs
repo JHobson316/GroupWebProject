@@ -4,6 +4,7 @@ using GroupWebProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroupWebProject.Migrations
 {
     [DbContext(typeof(GroupContext))]
-    partial class GroupContextModelSnapshot : ModelSnapshot
+    [Migration("20221205170055_SeedData")]
+    partial class SeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,15 +23,6 @@ namespace GroupWebProject.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-
-            modelBuilder.Entity("GroupWebProject.Models.AdminDash", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
             modelBuilder.Entity("GroupWebProject.Models.Category", b =>
                 {
@@ -39,22 +32,9 @@ namespace GroupWebProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AdminDash");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "admin"
-                        });
 
                     b.Property<string>("Slug")
                         .IsRequired()
@@ -100,7 +80,6 @@ namespace GroupWebProject.Migrations
                     b.HasIndex("CategoryID");
 
                     b.ToTable("Products");
-
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
