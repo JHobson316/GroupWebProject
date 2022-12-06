@@ -45,13 +45,13 @@ app.UseAuthentication();;
 
 app.UseAuthorization();
 
+app.MapRazorPages();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<GroupContext>();
 SeedData.SeedDatabase(context);
-
-app.MapRazorPages();
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
 

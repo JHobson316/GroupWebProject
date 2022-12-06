@@ -10,10 +10,10 @@ namespace GroupWebProject.Areas.Identity.Data
         public static void SeedDatabase(GroupContext Context)
         {
             Context.Database.Migrate();
-            if(Context.Products.Any()) {
+            if(!Context.Products.Any()) {
                 Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
                 Category Apparel = new Category { Name = "Apparel", Slug = "apparel"};
-                Context.AddRange(
+                Context.Products.AddRange(
                     new Product
                     {
 
@@ -26,13 +26,23 @@ namespace GroupWebProject.Areas.Identity.Data
                     },
                     new Product
                     {
-                        Name = "SkollKandi",
+                        Name = "SkollKandi Beanie",
                         Slug = "beanie",
                         Price = 14.99m,
                         Category = Apparel,
                         Description = "beanie with ear-muff flaps for keeping your ears warm"
-                    }
+                    },
+                    new Product
+                    {
+                        Name = "Bast Bluetooth Headphones",
+                        Slug = "bast bluetooth headphones",
+                        Price = 129.99m,
+                        Category = Electronics,
+                        Description = "Headphones with noise cancelling features, ",
+                        Image = "Heaphones.jpg"
+                    } 
                     );
+                
                 Context.SaveChanges();
             }
         } 
