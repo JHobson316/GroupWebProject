@@ -4,7 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+using GroupWebProject.Models;
+using System.Xml.Linq;
+
+
 using System.Security.Cryptography.X509Certificates;
+
 
 namespace GroupWebProject.Data;
 
@@ -24,6 +30,7 @@ public class GroupContext : IdentityDbContext<IdentityUser>
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
         builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
+        builder.Entity<AdminDash>().HasData(new AdminDash { Id = 1, Name = "admin" });
 
 
         Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
@@ -57,6 +64,9 @@ public class GroupContext : IdentityDbContext<IdentityUser>
             builder.Property(u => u.LastName).HasMaxLength(255);
         }
     }
+
+    public DbSet<AdminDash> AdminDash { get; set; }
+
     //public class DataContext : DbContext
     //{
     //    public DataContext(DbContextOptions<DataContext> options) : base(options) { }
@@ -65,4 +75,5 @@ public class GroupContext : IdentityDbContext<IdentityUser>
 
     //}
     
+
 }
