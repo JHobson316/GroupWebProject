@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GroupWebProject.Data;
 using GroupWebProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GroupWebProject.Controllers
 {
@@ -20,6 +21,7 @@ namespace GroupWebProject.Controllers
         }
 
         // GET: AdminDashes
+        [Authorize(Policy = "RequireAdmin")]
         public async Task<IActionResult> Index()
         {
               return View(await _context.AdminDash.ToListAsync());

@@ -10,12 +10,14 @@ var connectionString = builder.Configuration.GetConnectionString("GroupContextCo
 builder.Services.AddDbContext<GroupContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<GroupContext>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+AddAuthorizationPolicies();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -41,3 +43,11 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
+void AddAuthorizationPolicies()
+{
+    builder.Services.AddAuthorization(options => 
+    {
+        options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Admin"));
+});
+}
