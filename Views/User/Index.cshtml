@@ -1,7 +1,13 @@
-﻿@model IEnumerable<GroupWebProject.Models.AdminDash>
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Tilte"] = "Users";
 }
+@model ICollection<GroupWebProject.Areas.Identity.Data.AppUser>
+
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,6 +29,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
+                            <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="AdminDashes" asp-action="Index">AdminDashBoard</a>
+                             </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
@@ -32,13 +41,39 @@
             </div>
         </nav>
     </header>
-    <div style="text-align:center;">
-        <main>
-            <h1>Admin DashBoard</h1> 
-<div class="Users">
-    <p>User DashBoard</p>
-    <button style="width:75px;height:75px; background-color: lightgreen; cursor: pointer" onclick="location.href='@Url.Action("Index", "User")';return false;">Users</button>
-            </div>
-        </main>
-    </div>
-    </body>
+    <div class="text-center">
+        <h1 class=" = "display-4>Users</h1>
+    @if (@Model != null && Model.Any())
+    {
+            <table class="table" style="color:lightgreen;">
+            <thead>
+                <tr>
+                    <th scope="col">User ID</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <th scope="row">@user.Id</th>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Email</td>
+                        <td>
+                            <a asp-controller="User" asp-action="Details" asp-route-id="@user.Id">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+<div class=" text-center">
+
+</div>
+</body>
