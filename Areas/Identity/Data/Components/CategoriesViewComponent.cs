@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace GroupWebProject.Areas.Identity.Data
+namespace GroupWebProject.Areas.Identity.Data.Components
 {
     public class CategoriesViewComponent : ViewComponent
     {
