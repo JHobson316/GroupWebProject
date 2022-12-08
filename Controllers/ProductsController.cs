@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GroupWebProject.Data;
 using GroupWebProject.Models;
+
 using Microsoft.AspNetCore.Authorization;
+
 
 namespace GroupWebProject.Controllers
 {
@@ -21,7 +23,9 @@ namespace GroupWebProject.Controllers
         }
 
         // GET: Products
+
         [AllowAnonymous]
+
         public async Task<IActionResult> Index()
         {
             var groupContext = _context.Products.Include(p => p.Category);
@@ -29,6 +33,7 @@ namespace GroupWebProject.Controllers
         }
 
         // GET: Products/Details/5
+
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
@@ -49,6 +54,7 @@ namespace GroupWebProject.Controllers
         }
 
         // GET: Products/Create
+
         [Authorize(Policy = "RequireAdmin")]
         public IActionResult Create()
         {
@@ -59,6 +65,7 @@ namespace GroupWebProject.Controllers
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [Authorize(Policy = "RequireAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -95,6 +102,7 @@ namespace GroupWebProject.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [Authorize(Policy = "RequireAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
