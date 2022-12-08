@@ -125,7 +125,7 @@ namespace GroupWebProject.Areas.Identity.Pages.Account
                     var claims = new List<Claim>
                     {
                         new Claim("amr", "pwd"),
-                       
+
                     };
                     var roles = await _signInManager.UserManager.GetRolesAsync(user);
 

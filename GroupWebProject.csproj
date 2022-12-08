@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Models\Services\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
