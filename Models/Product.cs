@@ -21,6 +21,6 @@ namespace GroupWebProject.Models
         public long CategoryID { get; set; }
         public Category Category { get; set; }
         public string Slug { get; set; }
-        public string Image{ get; set; }
+        public string image { get; set; }
     }
 }
