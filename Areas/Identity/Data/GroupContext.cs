@@ -21,7 +21,7 @@ public class GroupContext : IdentityDbContext<AppUser>
     public GroupContext()
     {
     }
-
+    public DbSet<AdminDash> AdminDash { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Catgories { get; set; }
 
@@ -36,7 +36,7 @@ public class GroupContext : IdentityDbContext<AppUser>
         builder.Entity<AdminDash>().HasData(new AdminDash { Id = 1, Name = "admin" });
 
 
-        /* Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
+        /*Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
          Category Apparel = new Category { Name = "Apparel", Slug = "apparel" };
          AddRange(
              new Product
@@ -61,6 +61,36 @@ public class GroupContext : IdentityDbContext<AppUser>
 
     }
 
+       /* Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
+        Category Apparel = new Category { Name = "Apparel", Slug = "apparel" };
+        if (!context1.Products.Any())
+            context1.Products.AddRange(
+            new Product
+            {
+
+                Name = "Nintenda Swatch",
+                Slug = "nintenda-swatch",
+                Price = 299.99m,
+                Category = Electronics,
+                Description = "This year's hottest gaming console! Enjoy classic titles like 'Subpar Metroid' and 'Super Mario Sisters'!",
+                Image = "NintendoSwatch.jpg"
+
+            },
+            new Product
+            {
+                Name = "SkollKandi Beanie",
+                Slug = "skollkandi beanie",
+                Price = 14.99m,
+                Category = Apparel,
+                Description = "beanie with ear-muff flaps for keeping your ears warm",
+                Image = "SKBeanie.jpg"
+            }
+            
+
+            );
+        context1.SaveChanges();*/
+
+
     public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<AppUser>
     {
         public void Configure(EntityTypeBuilder<AppUser> builder)
@@ -70,7 +100,7 @@ public class GroupContext : IdentityDbContext<AppUser>
         }
     }
 
-    public DbSet<AdminDash> AdminDash { get; set; }
+    
 
     //public class DataContext : DbContext
     //{
