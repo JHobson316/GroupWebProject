@@ -1,0 +1,15 @@
+﻿@model SmallCartViewModel
+@using GroupWebProject.Models.Viewmodels
+
+@if (Model != null)
+{
+    <p>Items in cart: <span class="badge badge-primary">@Model.NumberOfitems</span></p>
+    <p>Total: <b>@Model.TotalAmount.ToString("C2")</b></p>
+    <a class="btn btn-primary mb-2" asp-controller="Cart" asp-action="Index">View Cart</a>
+    <a class="btn btn-primary" asp-controller="Cart" asp-action="Clear">Clear Cart</a>
+}
+else
+{
+    <p class="lead m-0">Your Cart is empty</p>
+}
+

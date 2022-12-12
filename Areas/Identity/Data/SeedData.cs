@@ -52,7 +52,8 @@ namespace GroupWebProject.Areas.Identity.Data
                         Description = "These doghead-shaped airbuds play your music with the clearest quality Appricot has to give.",
                         image = "Airbuds.jpg"
                     });
-                
+
+
                 Context.SaveChanges();
             }
         } 
