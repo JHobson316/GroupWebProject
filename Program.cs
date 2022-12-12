@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using GroupWebProject.Areas.Identity.Data;
 using GroupWebProject.Data;
-
+using GroupWebProject.Models.Interfaces;
+using GroupWebProject.Models;
 using System;
-
 using GroupWebProject.Migrations;
 using SeedData = GroupWebProject.Areas.Identity.Data.SeedData;
 
@@ -20,9 +20,12 @@ builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireCo
     .AddEntityFrameworkStores<GroupContext>();
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+//builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
 
 AddAuthorizationPolicies();
+AddScoped();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -61,4 +64,10 @@ void AddAuthorizationPolicies()
     {
         options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Admin"));
 });
+}
+
+void AddScoped()
+{
+    builder.Services.AddScoped<IUser, Users>();
+    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 }
