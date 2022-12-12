@@ -2,6 +2,9 @@
 /*using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GroupWebProject.Pages.Shared
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace GroupWebProject.Pages.Shared.Components.Categories
 {
     public class IndexModel : PageModel
     {
@@ -18,3 +21,4 @@ namespace GroupWebProject.Pages.Shared
         }
     }
 }*/
+}

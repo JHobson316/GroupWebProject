@@ -26,13 +26,30 @@ namespace GroupWebProject.Controllers
 
         [AllowAnonymous]
         public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string CategorySlug = "", int p = 1)
+
         {
-            var groupContext = _context.Products.Include(p => p.Category);
-            return View(await groupContext.ToListAsync());
+            int PageSize = 3;
+            ViewBag.PageNumber = p;
+            ViewBag.PageRange = PageSize;
+            ViewBag.CategorySlug = CategorySlug;
+            if(CategorySlug == "")
+            {
+                ViewBag.TotalPages = (int)Math.Ceiling((decimal)_context.Products.Count() / PageSize);
+                return View(await _context.Products.OrderByDescending(p => p.ID).Skip((p - 1) * PageSize).Take(PageSize).ToListAsync());
+            }
+            Category category = await _context.Catgories.Where(c => c.Slug == CategorySlug).FirstOrDefaultAsync();
+            if (category == null) return RedirectToAction("Index");
+
+            var productsByCategory = _context.Products.Where(p => p.CategoryID == category.Id);
+            ViewBag.TotalPages = (int)Math.Ceiling((decimal)productsByCategory.Count() / PageSize);
+
+            return View(await productsByCategory.OrderByDescending(p => p.ID).Skip((p - 1) * PageSize).Take(PageSize).ToListAsync());
         }
 
-        // GET: Products/Details/5
 
+        // GET: Products/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {

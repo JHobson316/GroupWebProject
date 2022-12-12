@@ -9,7 +9,7 @@ namespace GroupWebProject.Areas.Identity.Data
     {
         public static void SeedDatabase(GroupContext Context)
         {
-            Context.Database.Migrate();
+            //Context.Database.Migrate();
             if(!Context.Products.Any()) {
                 Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
                 Category Apparel = new Category { Name = "Apparel", Slug = "apparel"};
@@ -31,7 +31,9 @@ namespace GroupWebProject.Areas.Identity.Data
                         Price = 14.99m,
                         Category = Apparel,
                         Description = "beanie with ear-muff flaps for keeping your ears warm"
-                    },
+                    }
+                    );
+                Context.Products.AddRange(
                     new Product
                     {
                         Name = "Bast Bluetooth Headphones",
@@ -39,9 +41,17 @@ namespace GroupWebProject.Areas.Identity.Data
                         Price = 129.99m,
                         Category = Electronics,
                         Description = "Headphones with noise cancelling features, ",
-                        Image = "Heaphones.jpg"
-                    } 
-                    );
+                        image = "Heaphones.jpg"
+                    },
+                    new Product
+                    {
+                        Name = "Appricot Airbuds",
+                        Slug = "appricot airbuds",
+                        Price = 99.99m,
+                        Category = Electronics,
+                        Description = "These doghead-shaped airbuds play your music with the clearest quality Appricot has to give.",
+                        image = "Airbuds.jpg"
+                    });
                 
                 Context.SaveChanges();
             }

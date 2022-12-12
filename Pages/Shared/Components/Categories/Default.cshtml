@@ -1,4 +1,8 @@
+
 ﻿@using GroupWebProject.Models
+﻿@using GroupWebProject
+@using GroupWebProject.Models
+
 @model IEnumerable<Category>
 
     <ul>
@@ -12,3 +16,10 @@
         </li>
     }
 </ul>
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+            <a class="nav-link text-dark" asp-controller="Products" asp-action="Index" asp-route-CategorySlug="@item.Slug">@item.Name</a>
+            </li>
+        }
+    </ul>

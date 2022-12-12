@@ -60,6 +60,7 @@ public class GroupContext : IdentityDbContext<AppUser>
              );*/
 
     }
+
        /* Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
         Category Apparel = new Category { Name = "Apparel", Slug = "apparel" };
         if (!context1.Products.Any())
@@ -88,7 +89,7 @@ public class GroupContext : IdentityDbContext<AppUser>
 
             );
         context1.SaveChanges();*/
-    
+
 
     public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<AppUser>
     {
