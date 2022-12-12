@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using GroupWebProject.Areas.Identity.Data;
 using GroupWebProject.Data;
 using GroupWebProject.Models.Interfaces;
+using GroupWebProject.Models.Services;
 using GroupWebProject.Models;
 using System;
 using GroupWebProject.Migrations;
@@ -22,7 +23,7 @@ builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireCo
 // Add services to the container.
 //builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddTransient<IAzureBlob, AzureBlobService>();
 AddAuthorizationPolicies();
 AddScoped();
 

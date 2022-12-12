@@ -25,7 +25,10 @@ namespace GroupWebProject.Controllers
         // GET: Products
 
         [AllowAnonymous]
+        public async Task<IActionResult> Index()
+
         public async Task<IActionResult> Index(string CategorySlug = "", int p = 1)
+
         {
             int PageSize = 3;
             ViewBag.PageNumber = p;
@@ -48,7 +51,6 @@ namespace GroupWebProject.Controllers
 
         // GET: Products/Details/5
         [AllowAnonymous]
-
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Products == null)
