@@ -24,9 +24,9 @@ namespace GroupWebProject.Controllers
 
         // GET: Products
 
+        
+        //public async Task<IActionResult> Index();
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
-
         public async Task<IActionResult> Index(string CategorySlug = "", int p = 1)
 
         {
