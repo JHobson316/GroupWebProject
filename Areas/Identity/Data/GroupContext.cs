@@ -21,7 +21,7 @@ public class GroupContext : IdentityDbContext<AppUser>
     public GroupContext()
     {
     }
-
+    public DbSet<AdminDash> AdminDash { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Catgories { get; set; }
 
@@ -36,7 +36,7 @@ public class GroupContext : IdentityDbContext<AppUser>
         builder.Entity<AdminDash>().HasData(new AdminDash { Id = 1, Name = "admin" });
 
 
-        /* Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
+        /*Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
          Category Apparel = new Category { Name = "Apparel", Slug = "apparel" };
          AddRange(
              new Product
@@ -60,7 +60,7 @@ public class GroupContext : IdentityDbContext<AppUser>
              );*/
 
     }
-        Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
+       /* Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
         Category Apparel = new Category { Name = "Apparel", Slug = "apparel" };
         if (!context1.Products.Any())
             context1.Products.AddRange(
@@ -87,8 +87,8 @@ public class GroupContext : IdentityDbContext<AppUser>
             
 
             );
-        context1.SaveChanges();
-    }
+        context1.SaveChanges();*/
+    
 
     public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<AppUser>
     {
@@ -99,7 +99,7 @@ public class GroupContext : IdentityDbContext<AppUser>
         }
     }
 
-    public DbSet<AdminDash> AdminDash { get; set; }
+    
 
     //public class DataContext : DbContext
     //{

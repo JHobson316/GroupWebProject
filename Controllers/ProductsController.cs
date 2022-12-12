@@ -25,7 +25,6 @@ namespace GroupWebProject.Controllers
         // GET: Products
 
         [AllowAnonymous]
-
         public async Task<IActionResult> Index()
         {
             var groupContext = _context.Products.Include(p => p.Category);

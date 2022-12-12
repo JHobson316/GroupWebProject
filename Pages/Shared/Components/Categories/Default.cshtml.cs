@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+/*using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GroupWebProject.Pages.Shared
 {
@@ -17,4 +17,4 @@ namespace GroupWebProject.Pages.Shared
 
         }
     }
-}
+}*/
