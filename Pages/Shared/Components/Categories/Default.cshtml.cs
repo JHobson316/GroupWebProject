@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-/*using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace GroupWebProject.Pages.Shared
 using Microsoft.AspNetCore.Mvc.RazorPages;
+namespace GroupWebProject.Pages.Shared { 
+
 
 namespace GroupWebProject.Pages.Shared.Components.Categories
 {
@@ -21,4 +20,4 @@ namespace GroupWebProject.Pages.Shared.Components.Categories
         }
     }
 }
-}*/
+}

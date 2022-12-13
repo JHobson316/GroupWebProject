@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using GroupWebProject.Areas.Identity.Data
 @using GroupWebProject.Pages.Shared
+﻿@using GroupWebProject.Models
+﻿@using GroupWebProject
 
 @inject SignInManager<AppUser> SignInManager
 
@@ -36,9 +38,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li class="nav-item">
                                         <a class="dropdown-item" asp-area="" asp-controller="AdminDashes" asp-action="Index">AdminDashBoard</a>
-                                    </li><li class="nav-item">
-                                        <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
-                                    </li>
+                                    </li>                                    
                                 </ul>
                             </li>
                         }
