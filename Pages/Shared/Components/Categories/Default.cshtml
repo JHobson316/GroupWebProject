@@ -1,24 +1,31 @@
-
+@using GroupWebProject.Models
+@using GroupWebProject
 @using GroupWebProject
 @using GroupWebProject.Models
 @using GroupWebProject.Pages.Shared
 @model IEnumerable<Category>
-
-    <ul>
+  
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GroupWebProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/GroupWebProject.styles.css" asp-append-version="true" />
+</head>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdowns" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Category
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
         <li class="list-group-item">
-        <a class="nav-link text-dark" asp-controller="Products" asp-action="Index">All Products</a>
+            <a class="nav-link text-dark" asp-controller="Products" asp-action="Index">All Products</a>
         </li>
-    @foreach (var item in Model)
-    {
-        <li class="list-group-item">
-            <a class="nav-link text-dark" asp-controller="Products" asp-action="Index">@item.Name</a>
-        </li>
-    }
-</ul>
         @foreach (var item in Model)
         {
             <li class="list-group-item">
-            <a class="nav-link text-dark" asp-controller="Products" asp-action="Index" asp-route-CategorySlug="@item.Slug">@item.Name</a>
+                <a class="nav-link text-dark" asp-controller="Products" asp-action="Index" asp-route-CategorySlug="@item.Slug">@item.Name</a>
             </li>
         }
     </ul>
+</li>
