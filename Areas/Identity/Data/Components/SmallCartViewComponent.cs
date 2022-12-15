@@ -1,4 +1,4 @@
-﻿using GroupWebProject.Models.Viewmodels;
+﻿using GroupWebProject.Models.ViewModels;
 using GroupWebProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Session;
@@ -11,13 +11,13 @@ namespace GroupWebProject.Areas.Identity.Data.Components
         public IViewComponentResult Invoke()
         {
             List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") != null ? HttpContext.Session.GetJson<List<CartItem>>("Cart") : new List<CartItem>();
-            SmallCartViewModel smallCartVM;
+            SmallCartViewModel smallCartVM = null;
 
-            if(cart != null || cart.Count == 0) 
+            if (cart != null && cart.Count == 0) 
             {
                 smallCartVM = null;
             }
-            else
+            else if (cart.Count >= 1)
             {
                 smallCartVM = new()
                 {

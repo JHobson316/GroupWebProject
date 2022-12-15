@@ -23,3 +23,17 @@ h1,h2,h3,h4,label,p{
 footer{
     background-color:white;
 }
+table{
+    background-color:darkslategrey;
+}
+td{
+    color:black;
+}
+th{
+    color:black;
+}
+.col-4{
+    background-color:white;
+    border-radius: 20px;
+    margin: 5px;
+}

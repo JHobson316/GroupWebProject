@@ -7,43 +7,73 @@
 @{
     ViewData["Title"] = "Cart";
 }
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/GroupWebProject.styles.css" asp-append-version="true" />
+</head>
 
-<h1>Cart Page</h1>
-
-@if (Model.CartItems.Count > 0){
-    <table class="table">
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th></th>
-            <th>Price</th>
-            <th>Total</th>
-        </tr>
-        @foreach (var item in Model.CartItems)
-        {
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">The Shop</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+                <partial name="_LoginPartial" />
+            </div>
+        </nav>
+        <h1>Cart Page</h1>
+    </header>
+    @if (Model.CartItems.Count > 0)
+    {
+        <table class="table">
             <tr>
-                <td>@item.ProductName</td>
-                <td>@item.Quantity</td>
-                <td>
-                    <a class="btn btn-primary btn-sm" asp-action="Add" asp-route-id="@item.ProductID">Add</a>
-                    <a class="btn btn-info btn-sm" asp-action="Decrease" asp-route-id="@item.ProductID">Decrease</a>
-                    <a class="btn btn-danger btn-sm" asp-action="Remove" asp-route-id="@item.ProductID">Remove</a>
-                </td>
-                <td>@item.Price.ToString("C2")</td>
-                <td>@Model.CartItems.Where(x => x.ProductID == item.ProductID).Sum(x => x.Quantity*x.Price).ToString("C2")</td>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th></th>
+                <th>Price</th>
+                <th>Total</th>
             </tr>
-        }
-        <tr>
-            <td class="text-right" colspan="4">Total: @Model.FullTotal.ToString("C2")</td>
-        </tr>
-        <tr>
-            <td class="text-right" colspan="4">
-                <a class="btn btn-danger" asp-action="Clear"></a>
-                <a class="btn btn-danger" asp-action="Checkout"></a>
-            </td>
-        </tr>
-    </table>
-}
-else {
-    <h3 class="display-4 text-center">Your cart is empty</h3>
-}
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-action="Add" asp-route-id="@item.ProductID">Add</a>
+                        <a class="btn btn-info btn-sm" asp-action="Decrease" asp-route-id="@item.ProductID">Decrease</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Remove" asp-route-id="@item.ProductID">Remove</a>
+                    </td>
+                    <td>@item.Price.ToString("C2")</td>
+                    <td>@Model.CartItems.Where(x => x.ProductID == item.ProductID).Sum(x => x.Quantity*x.Price).ToString("C2")</td>
+                </tr>
+            }
+            <tr>
+                <td class="text-right" colspan="4">Total: @Model.FullTotal.ToString("C2")</td>
+            </tr>
+            <tr>
+                <td class="text-right" colspan="4">
+                    <a class="btn btn-danger" asp-action="Clear">Clear</a>
+                    <a class="btn btn-danger" asp-action="Checkout">Checkout</a>
+                </td>
+            </tr>
+        </table>
+    }
+    else
+    {
+        <h3 class="display-4 text-center">Your cart is empty</h3>
+    }
+</body>

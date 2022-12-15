@@ -1,4 +1,4 @@
-﻿namespace GroupWebProject.Models.Viewmodels;
+﻿namespace GroupWebProject.Models.ViewModels;
 public class SmallCartViewModel
 {
     public int NumberOfitems { get; set; }
