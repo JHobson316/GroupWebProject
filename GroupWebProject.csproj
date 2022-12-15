@@ -24,8 +24,4 @@
     <PackageReference Include="xunit.extensibility.core" Version="2.4.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Services\" />
-  </ItemGroup>
-
 </Project>
