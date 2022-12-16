@@ -12,7 +12,7 @@ using System.IO;
 using RestSharp;
 using RestSharp.Authenticators;
 using SeedData = GroupWebProject.Areas.Identity.Data.SeedData;
-
+using Microsoft.CodeAnalysis;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("GroupContextConnection") ?? throw new InvalidOperationException("Connection string 'GroupContextConnection' not found.");
@@ -82,4 +82,7 @@ void AddScoped()
 {
     builder.Services.AddScoped<IUser, Users>();
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+    builder.Services.AddTransient<IPayment, AuthnetPaymentService>();
+    builder.Services.AddTransient<IAzureBlob, AzureBlobService>();
+    builder.Services.AddTransient<GroupWebProject.Models.Document>();
 }
