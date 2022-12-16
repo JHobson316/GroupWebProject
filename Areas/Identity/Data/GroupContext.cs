@@ -24,6 +24,8 @@ public class GroupContext : IdentityDbContext<AppUser>
     public DbSet<AdminDash> AdminDash { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Catgories { get; set; }
+    public DbSet<Payment> Payment { get; set; }
+    public DbSet<PaymentResponse> PaymentResponse { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -33,7 +35,7 @@ public class GroupContext : IdentityDbContext<AppUser>
         // Add your customizations after calling base.OnModelCreating(builder);
         builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
 
-        builder.Entity<AdminDash>().HasData(new AdminDash { Id = 1, Name = "admin" });
+        //builder.Entity<AdminDash>().HasData(new AdminDash { Id = 1, Name = "admin" });
 
 
         /*Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };

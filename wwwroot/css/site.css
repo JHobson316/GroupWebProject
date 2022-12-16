@@ -139,3 +139,10 @@ footer{
     color: black;
 }
 
+
+#EditForm {
+    display: grid;
+    color: yellow;
+    margin-left:300px;
+    width:auto;
+}

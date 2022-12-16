@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GroupWebProject.Controllers
 {
@@ -23,11 +24,12 @@ namespace GroupWebProject.Controllers
             BlobService = blobService;
 
         }
+        [Authorize(Policy = "RequireAdmin")]
         public IActionResult Index()
         {
-            return View();
+            return Index();
         }
-
+        [Authorize(Policy = "RequireAdmin")]
         [HttpPost]
         public async Task<IActionResult> Index(IFormFile file)
         {
@@ -35,7 +37,7 @@ namespace GroupWebProject.Controllers
             Document doc = await BlobService.Upload(file);
 
             // Upload the file
-            return View(doc);
+            return PartialView(doc);
         }
     }
 }
