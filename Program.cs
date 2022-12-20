@@ -85,4 +85,5 @@ void AddScoped()
     builder.Services.AddTransient<IPayment, AuthnetPaymentService>();
     builder.Services.AddTransient<IAzureBlob, AzureBlobService>();
     builder.Services.AddTransient<GroupWebProject.Models.Document>();
+    builder.Services.AddTransient<GroupWebProject.Pages.Index1Model>();
 }
