@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GroupWebProject.Models;
+using GroupWebProject.Models.Viewmodels;
+using GroupWebProject.Models.ViewModels;
 
 namespace GroupWebProject.Models
 {

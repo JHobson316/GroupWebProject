@@ -146,3 +146,11 @@ footer{
     margin-left:300px;
     width:auto;
 }
+
+#cartItems{
+    color:lightgreen;
+}
+
+.table{
+    color:lightgreen;
+}

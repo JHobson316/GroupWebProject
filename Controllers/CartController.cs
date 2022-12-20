@@ -1,6 +1,8 @@
 ﻿using GroupWebProject.Areas.Identity.Data;
 using GroupWebProject.Data;
 using GroupWebProject.Models;
+using GroupWebProject.Models.Interfaces;
+using GroupWebProject.Models.Services;
 using GroupWebProject.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +12,11 @@ namespace GroupWebProject.Controllers
     public class CartController : Controller
     {
         private readonly GroupContext _context;
-
         public CartController(GroupContext context)
         {
             _context = context;
         }
+        
         public IActionResult Index()
         {
             List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") ?? new List<CartItem>();
@@ -25,6 +27,7 @@ namespace GroupWebProject.Controllers
             };
             return View(cartVM);
         }
+
         //[Authorize(Policy = "RequireAdmin")]
         public async Task<IActionResult> Add(int id)
         {
