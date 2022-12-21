@@ -63,6 +63,8 @@
                 <label>Categories</label>
                 <select asp-for="CategoryID" class ="form-control" asp-items="ViewBag.Categories">
                     <option value="0">Choose A Category</option>
+                    <option value="2">Apparel</option>
+                    <option value="1">Electronics</option>
                 </select>
                 <span asp-validation-for="CategoryID" class="text-danger"></span>
             </div>

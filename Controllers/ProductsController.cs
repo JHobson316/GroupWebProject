@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GroupWebProject.Data;
 using GroupWebProject.Models;
-
 using Microsoft.AspNetCore.Authorization;
 
 
@@ -16,13 +15,13 @@ namespace GroupWebProject.Controllers
     public class ProductsController : Controller
     {
         private readonly GroupContext _context;
+        private readonly IWebHostEnvironment _WebHostEnvironment;
 
         public ProductsController(GroupContext context)
         {
             _context = context;
+            //_WebHostEnvironment = webHostEnvironment;
         }
-
-        // GET: Products
 
         
         //public async Task<IActionResult> Index();
@@ -51,7 +50,7 @@ namespace GroupWebProject.Controllers
 
         // GET: Products/Details/5
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details (int? id)
         {
             if (id == null || _context.Products == null)
             {
@@ -68,34 +67,57 @@ namespace GroupWebProject.Controllers
 
             return View(product);
         }
+        // GET: Products
+        //public IActionResult Create()
+        //{
+        //    ViewBag.Categories = new SelectList(_context.Catgories, "ID", "Name");
+
+        //}
 
         // GET: Products/Create
 
-        [Authorize(Policy = "RequireAdmin")]
-        public IActionResult Create()
+        //[Authorize(Policy = "RequireAdmin")]
+        //Really just wasted some time with this code
+        public async Task<IActionResult> Create(Product product)
         {
-            ViewData["CategoryID"] = new SelectList(_context.Catgories, "Id", "Id");
-            return View();
+            ViewData["CategoryID"] = new SelectList(_context.Catgories, "Id", "Name", product.CategoryID);
+            if (ModelState.IsValid)
+            {
+                product.Slug = product.Name.ToLower().Replace(" ", "-");
+                var slug = await _context.Products.FirstOrDefaultAsync(p => p.Slug == product.Slug);
+                if (slug != null)
+                {
+                    ModelState.AddModelError("", "This product already exists.");
+                    return View(product);
+                }
+
+                _context.Add(product);
+                await _context.SaveChangesAsync();
+
+                TempData["Success"] = "Product has been created!";
+                return RedirectToAction("Index");
+            }
+            return View(product);
         }
 
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 
-        [Authorize(Policy = "RequireAdmin")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Description,Price,CategoryID,Slug,image")] Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CategoryID"] = new SelectList(_context.Catgories, "Id", "Id", product.CategoryID);
-            return View(product);
-        }
+        //[Authorize(Policy = "RequireAdmin")]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("ID,Name,Description,Price,CategoryID,Slug,image")] Product product)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(product);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    ViewData["CategoryID"] = new SelectList(_context.Catgories, "Id", "Id", product.CategoryID);
+        //    return View(product);
+        //}
 
         // GET: Products/Edit/5
         [Authorize(Policy = "RequireAdmin")]
