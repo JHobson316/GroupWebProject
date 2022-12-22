@@ -1,13 +1,67 @@
 ﻿@model GroupWebProject.Models.Product
+@using GroupWebProject.Pages.Shared
+@using Microsoft.AspNetCore.Identity
+@using GroupWebProject.Areas.Identity.Data
+﻿@using GroupWebProject.Models
+﻿@using GroupWebProject
+@inject GroupWebProject.Models.Document Document
+@inject SignInManager<AppUser> SignInManager
 
 @{
     ViewData["Title"] = "Edit";
 }
-
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GroupWebProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/GroupWebProject.styles.css" asp-append-version="true" />
+</head>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">The Shop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Shop DashBoard
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" asp-area="" asp-controller="AdminDashes" asp-action="Index">AdminDashBoard</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                    </li>
+                </ul>
+            </div>
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
+</header>
 <h1>Edit</h1>
 
 <h4>Product</h4>
 <hr />
+<div id="EditForm">
+<p>convert an image file to a url (will open a new tab)</p>
+<form target="_blank" asp-controller="Picture" asp-action="Index" method="post" enctype="multipart/form-data">
+    <div><input name="file" type="file" /></div>
+    <button>Upload</button>
+</form>
+<br />
+
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -39,7 +93,7 @@
                 <span asp-validation-for="Slug" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="image" class="control-label"></label>
+                <label asp-for="image" class="control-label">Image-URL</label>
                 <input asp-for="image" class="form-control" />
                 <span asp-validation-for="image" class="text-danger"></span>
             </div>
@@ -49,10 +103,11 @@
         </form>
     </div>
 </div>
-
+</div>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

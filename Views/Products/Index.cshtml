@@ -1,55 +1,74 @@
 ﻿@model IEnumerable<GroupWebProject.Models.Product>
 @using GroupWebProject.Pages.Shared
+@using Microsoft.AspNetCore.Identity
+@using GroupWebProject.Areas.Identity.Data
+﻿@using GroupWebProject.Models
+﻿@using GroupWebProject
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@inject SignInManager<AppUser> SignInManager
+
 
 
 @{
     ViewData["Title"] = "Products";
 }
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GroupWebProject</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/GroupWebProject.styles.css" asp-append-version="true" />
 </head>
-
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">The Shop</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-                <partial name="_LoginPartial" />
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">The Shop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-        <h1>Product Page</h1>
-    </header>
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
+</header>
+@if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
+{
+    <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Create" style="color: lightgreen; width:200px;">Create New Product</a>
+}
+<h1>Products</h1>
+
 <div class="row">
     @foreach (var item in Model)
     {
         <div class="col-4">
-            <img src="/media/products/@item.image" class="img-fluid" alt="" />
+            <img src="@item.image" class="img-fluid" alt="" style="width:200px; height:200px; cursor:pointer;" onclick="location.href='@Url.Action("Details", "Products",  new { id = item.ID })'" />
             <h4>@item.Name</h4>
-            <div>
-                @Html.Raw(item.Description)
-            </div>
             <p>
                 @item.Price.ToString("C2")
             </p>
+            @if (SignInManager.IsSignedIn(User))
+            {
             <p>
                 <a class="btn btn-primary" asp-controller="Cart" asp-action="Add" asp-route-id="@item.ID">Add to cart</a>
             </p>
+            }else{
+                <p>Please sign in to add item to cart.</p>
+            }
+            @if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdmin")).Succeeded)
+            {
+                <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Edit" asp-route-id="@item.ID" style="color: lightgreen; width:200px;">Edit</a>
+            }
         </div>
     }
 

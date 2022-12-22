@@ -1,8 +1,7 @@
-﻿@model CartViewModel
+﻿
+@model CartViewModel
 @using GroupWebProject.Models.ViewModels;
-@using GroupWebProject.Pages.Shared
-
-
+@using GroupWebProject.Pages.Shared;
 
 @{
     ViewData["Title"] = "Cart";
@@ -77,3 +76,71 @@
         <h3 class="display-4 text-center">Your cart is empty</h3>
     }
 </body>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GroupWebProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/GroupWebProject.styles.css" asp-append-version="true" />
+</head>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">The Shop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                    </li>
+                </ul>
+            </div>
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
+</header>
+<h1>Cart Page</h1>
+<div id="cartItems">
+@if (Model.CartItems.Count > 0){
+    <table class="table">
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th></th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+        @foreach (var item in Model.CartItems)
+        {
+            <tr>
+                <td><img src="@item.image" alt="" style="width:50px; height:50px;" />@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" asp-action="Add" asp-route-id="@item.ProductID">Add</a>
+                    <a class="btn btn-info btn-sm" asp-action="Decrease" asp-route-id="@item.ProductID">Decrease</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Remove" asp-route-id="@item.ProductID">Remove</a>
+                </td>
+                <td>@item.Price.ToString("C2")</td>
+                <td>@Model.CartItems.Where(x => x.ProductID == item.ProductID).Sum(x => x.Quantity*x.Price).ToString("C2")</td>
+            </tr>
+        }
+        <tr>
+            <td class="text-right" colspan="4">Total: @Model.FullTotal</td>
+        </tr>
+        <tr>
+            <td class="text-right" colspan="4">
+                <a class="btn btn-danger" asp-action="Clear">Clear</a>
+                <a class="btn btn-danger" asp-page="/Payment">CheckOut</a>
+                
+    </table>
+}
+else {
+    <h3 class="display-4 text-center">Your cart is empty</h3>
+}
+</div>

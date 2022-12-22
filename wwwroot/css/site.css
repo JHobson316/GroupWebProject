@@ -26,7 +26,7 @@ footer{
 
 .transaction{
     border:groove 55px;
-    border-color: red;
+    border-color: limegreen;
     background-color:black;
     border-radius:5px 5px 5px 5px;
     width: 900px;
@@ -127,4 +127,30 @@ footer{
     100% {
         opacity: 0;
     }
+}
+
+#navbarDropdowns {
+    background-color: white;
+    width: 250px;
+    color: grey;
+}
+
+#navbarDropdowns:hover {
+    color: black;
+}
+
+
+#EditForm {
+    display: grid;
+    color: yellow;
+    margin-left:300px;
+    width:auto;
+}
+
+#cartItems{
+    color:lightgreen;
+}
+
+.table{
+    color:lightgreen;
 }

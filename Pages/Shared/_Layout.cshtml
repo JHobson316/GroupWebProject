@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using GroupWebProject.Areas.Identity.Data
 @using GroupWebProject.Pages.Shared
+﻿@using GroupWebProject.Models
+﻿@using GroupWebProject
 
 @inject SignInManager<AppUser> SignInManager
 
@@ -26,8 +28,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Home">Home</a>
-                        </li>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         @if (SignInManager.IsSignedIn(User)){
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -36,9 +37,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li class="nav-item">
                                         <a class="dropdown-item" asp-area="" asp-controller="AdminDashes" asp-action="Index">AdminDashBoard</a>
-                                    </li><li class="nav-item">
-                                        <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
-                                    </li>
+                                    </li>                                    
                                 </ul>
                             </li>
                         }

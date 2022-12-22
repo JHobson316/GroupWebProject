@@ -1,0 +1,43 @@
+﻿@page
+@model GroupWebProject.Pages.Index1Model
+@{
+}
+
+<h2>Card Payment Method</h2>
+
+<form method="post">
+    <p>FirstName</p>
+    <input asp-for="@Model.Payment.FirstName" placeholder="First Name" />
+    <p>LastName</p>
+    <input asp-for="@Model.Payment.LastName" placeholder="Last Name" />
+    <p>Billing Address</p>
+    <input asp-for="@Model.Payment.BillingAddress" placeholder="Billing Address" />
+    <p>Billing City</p>
+    <input asp-for="@Model.Payment.BillingCity" placeholder="City" />
+    <p>Billing Zip</p>
+    <input asp-for="@Model.Payment.BillingZip" placeholder="Zip Code" />
+    <p>Amount</p>
+    <input asp-for="@Model.Payment.Amount" placeholder="Amount" disabled />
+    <p>CardNumber</p>
+    <input asp-for="@Model.Payment.CardNumber" placeholder="Card Number" />
+    <p>Card Expiration</p>
+    <input asp-for="@Model.Payment.Expiration" placeholder="Expiration (MMDD)" />
+    <p>CVV</p>
+    <input asp-for="@Model.Payment.Cvv" placeholder="Security Code" />
+
+    <button>Submit Payment</button>
+
+</form>
+
+
+@if (Model.PaymentResponse != null)
+{
+    <hr />
+    <div style="color: lightgreen;">
+    <div>Success: @Model.PaymentResponse.Success.ToString()</div>
+    <div>Transaction ID: @Model.PaymentResponse.TransactionId</div>
+    <div>Response Code: @Model.PaymentResponse.Code</div>
+    <div>Response Message: @Model.PaymentResponse.Message</div>
+    <div>Response Description: @Model.PaymentResponse.Description</div>
+    </div>
+}
