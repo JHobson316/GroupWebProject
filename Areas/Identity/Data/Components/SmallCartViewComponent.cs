@@ -13,7 +13,7 @@ namespace GroupWebProject.Areas.Identity.Data.Components
             List<CartItem> cart = HttpContext.Session.GetJson<List<CartItem>>("Cart") != null ? HttpContext.Session.GetJson<List<CartItem>>("Cart") : new List<CartItem>();
             SmallCartViewModel smallCartVM;
 
-            if(cart != null || cart.Count == 0) 
+            if(cart != null && cart.Count == 0) 
             {
                 smallCartVM = null;
             }
