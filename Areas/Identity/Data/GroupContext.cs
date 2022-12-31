@@ -1,5 +1,7 @@
 ﻿using GroupWebProject.Areas.Identity.Data;
 using GroupWebProject.Models;
+using GroupWebProject.Models.Interfaces;
+using GroupWebProject.Models.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +26,6 @@ public class GroupContext : IdentityDbContext<AppUser>
     public DbSet<AdminDash> AdminDash { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Catgories { get; set; }
-    public DbSet<Payment> Payment { get; set; }
-    public DbSet<PaymentResponse> PaymentResponse { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -36,7 +36,6 @@ public class GroupContext : IdentityDbContext<AppUser>
         builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
 
         //builder.Entity<AdminDash>().HasData(new AdminDash { Id = 1, Name = "admin" });
-
 
         /*Category Electronics = new Category { Name = "Electronics", Slug = "electronics" };
          Category Apparel = new Category { Name = "Apparel", Slug = "apparel" };

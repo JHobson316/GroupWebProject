@@ -46,7 +46,7 @@ namespace GroupWebProject.Pages
                 BillingZip = "98034",
                 Amount = cartVM.FullTotal,
                 CardNumber = "4111111111111111",
-                Expiration = "1022",
+                Expiration = "1222",
                 Cvv = "555",
             };
         }
