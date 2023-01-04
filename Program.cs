@@ -31,6 +31,28 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential= true;
 });
 
+builder.Services.AddSwaggerDocument(config =>
+{
+    config.PostProcess = document =>
+    {
+        document.Info.Version = "v1";
+        document.Info.Title = "Group ECommerce App";
+        document.Info.Description = "A group ecommerce app";
+        document.Info.TermsOfService = "None";
+        document.Info.Contact = new NSwag.OpenApiContact
+        {
+            Name = "Curtrick",
+            Email = "curtrickw@yahoo.com",
+            Url = "https://yahoo.com",
+        };
+        document.Info.License = new NSwag.OpenApiLicense
+        {
+            Name = "Use under MIT",
+            Url = "https://opensource.org/licenses/MIT",
+        };
+    };
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IAzureBlob, AzureBlobService>();
@@ -65,6 +87,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.UseOpenApi();
+app.UseSwaggerUi3();
 var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<GroupContext>();
 SeedData.SeedDatabase(context);
 
