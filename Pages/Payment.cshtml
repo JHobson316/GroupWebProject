@@ -2,6 +2,7 @@
 @model GroupWebProject.Pages.Index1Model
 @{
 }
+<link rel="stylesheet" href="~/js/site.js" asp-append-version="true" />
 
 <h2>Card Payment Method</h2>
 
@@ -17,7 +18,7 @@
     <p>Billing Zip</p>
     <input asp-for="@Model.Payment.BillingZip" placeholder="Zip Code" />
     <p>Amount</p>
-    <input asp-for="@Model.Payment.Amount" placeholder="Amount" disabled />
+    <input asp-for="@Model.Payment.Amount" placeholder="Amount" ReadOnly />
     <p>CardNumber</p>
     <input asp-for="@Model.Payment.CardNumber" placeholder="Card Number" />
     <p>Card Expiration</p>
@@ -29,7 +30,6 @@
 
 </form>
 
-
 @if (Model.PaymentResponse != null)
 {
     <hr />
@@ -40,4 +40,19 @@
     <div>Response Message: @Model.PaymentResponse.Message</div>
     <div>Response Description: @Model.PaymentResponse.Description</div>
     </div>
+    @if (Model.PaymentResponse.Success.ToString() == "True")
+    {
+        TempData["message"] = "Paymet Successful!!!";
+        Response.Redirect("/cart/clear");
+
+    }
+    else if (Model.PaymentResponse.Success.ToString() == "False")
+    {
+                <script type="text/javascript">
+            window.onload = function () {
+                alert("Payment Failed!!!");
+            };
+        </script>
+    }
+
 }

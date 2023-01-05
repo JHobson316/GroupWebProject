@@ -1,5 +1,7 @@
 ﻿using GroupWebProject.Areas.Identity.Data;
 using GroupWebProject.Models;
+using GroupWebProject.Models.Interfaces;
+using GroupWebProject.Models.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
