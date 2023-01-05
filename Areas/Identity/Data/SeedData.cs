@@ -1,4 +1,4 @@
-﻿using GroupWebProject.Data;
+﻿/*using GroupWebProject.Data;
 using GroupWebProject.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -59,3 +59,4 @@ namespace GroupWebProject.Areas.Identity.Data
         } 
     }
 }
+*/

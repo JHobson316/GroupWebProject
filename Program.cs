@@ -11,7 +11,7 @@ using System;
 using System.IO;
 using RestSharp;
 using RestSharp.Authenticators;
-using SeedData = GroupWebProject.Areas.Identity.Data.SeedData;
+//using SeedData = GroupWebProject.Areas.Identity.Data.SeedData;
 using Microsoft.CodeAnalysis;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -90,7 +90,7 @@ app.MapControllerRoute(
 app.UseOpenApi();
 app.UseSwaggerUi3();
 var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<GroupContext>();
-SeedData.SeedDatabase(context);
+//SeedData.SeedDatabase(context);
 
 app.Run();
 
