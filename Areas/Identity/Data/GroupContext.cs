@@ -26,7 +26,7 @@ public class GroupContext : IdentityDbContext<AppUser>
     public DbSet<Category> Catgories { get; set; }
     public DbSet<AdminDash> AdminDash { get; set; }
     public DbSet<Payment> Payment { get; set; }
-    public DbSet<PaymentResponse> PaymentResponse { get; set; }
+    public DbSet<PaymentResponse> PaymentResponse{ get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
